@@ -3,6 +3,9 @@ import '@shopify/polaris/build/esm/styles.css';
 import axios from 'axios';
 import Webcam from 'react-webcam';
 import './App.css';
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import GifterSteps from './Pages/GifterSteps';
+import Landing from './Pages/Landing';
 
 function App() {
   const [orderId, setOrderId] = useState();
@@ -11,6 +14,12 @@ function App() {
   const mediaRecorderRef = React.useRef(null);
   const [capturing, setCapturing] = React.useState(false);
   const [recordedChunks, setRecordedChunks] = React.useState([]);
+
+  // const arr = [
+  //   {img:modal1,title:"First, you buy a gift from one of our gift partners",para:"If you are reading this, you've already purchased a gift from a store that works with RibbonReel."},
+  //   {img:modal2,title:"After buy the gift, you will record your video message.",para:"If you are reading this, you've already purchased a gift from a store that works with RibbonReel."},
+  //   {img:modal3,title:"3, you buy a gift from one of our gift partners",para:"If you are reading this, you've already purchased a gift from a store that works with RibbonReel."}
+  // ]
 
   useEffect(() => {
     let paramString = window.location.href.split('?')[1];
@@ -70,9 +79,16 @@ function App() {
       setRecordedChunks([]);
     }
   };
+  
   return (
     <div className="App">
-      <Webcam audio={true} ref={webcamRef} />
+      <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Landing />} />
+        <Route path="/giftersteps" element={<GifterSteps />} />
+      </Routes>
+      </BrowserRouter>
+      {/* <Webcam audio={true} ref={webcamRef} />
       {capturing ? (
         <button onClick={handleStopCaptureClick}>Stop Capture</button>
       ) : (
@@ -83,7 +99,7 @@ function App() {
           <button onClick={handleAddVideo}>Add Video</button>
           <p>{message}</p>
         </>
-      )}
+      )} */}
     </div>
   );
 }
