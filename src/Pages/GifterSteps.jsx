@@ -5,6 +5,7 @@ import Arrowright from "../assets/Arrowright.png";
 import arrowright from "../assets/arrow-right.png";
 import note from "../assets/note.png";
 import { useNavigate } from 'react-router-dom';
+import desk from "../assets/desk.png";
 
 function GifterSteps() {
     const navigate = useNavigate();
@@ -39,18 +40,33 @@ function GifterSteps() {
                     </div>
                     {step1 ?
                         <div className="recepient-content">
-                            <a onClick={() => navigate("/")}><img src={Arrowright} />Back</a>
-                            <h3 className="e1r txt28"><strong>Alex,</strong>to whom are you sending the video?</h3>
-                            <input type="text" value={step1Term} onChange={(e) => setStep1Term(e.target.value)} placeholder="Type your friend's name" className="e2r" />
-                            <a className="e2b txt20 continue-cta" onClick={() => setStep1(false)}>Continue<img src={arrowright} alt="" /></a>
+                            <div className="contact-wrapper">
+                                <div className="contact-content">
+                                    <a onClick={() => navigate("/")}><img src={Arrowright} />Back</a>
+                                    <h3 className="e1r txt28"><strong>Alex,</strong>to whom are you sending the video?</h3>
+                                    <input type="text" value={step1Term} onChange={(e) => setStep1Term(e.target.value)} placeholder="Type your friend's name" className="e2r" />
+                                    <a className="e2b txt20 continue-cta" onClick={() => setStep1(false)}>Continue<img src={arrowright} alt="" /></a>
+                                </div>
+
+                                <div className="contact-img">
+                                    <img src={desk} alt="" />
+                                </div>
+                            </div>
                         </div>
                         :
                         <div className="recepient-content contact">
-                            <a onClick={() => setStep1(true)}><img src={Arrowright} />Back</a>
-                            <h3 className="e1r txt28">Tell us where to send <strong>{step1Term}</strong> the video?</h3>
-                            <input type="number" minLength={10} maxLength={10} value={step2Term} onChange={(e) => setStep2Term(e.target.value)} placeholder="Type their cellphone" className="e2r" />
-                            <span className="e2b txt20">Use email instead</span>
-                            <a className="e2b txt20 continue-cta" onClick={() => { setStep1Complete(false); }}>Continue <img src={arrowright} alt="" /></a>
+                            <div className="contact-wrapper">
+                                <div className="contact-content">
+                                    <a onClick={() => setStep1(true)}><img src={Arrowright} />Back</a>
+                                    <h3 className="e1r txt28">Tell us where to send <strong>{step1Term}</strong> the video?</h3>
+                                    <input type="number" minLength={10} maxLength={10} value={step2Term} onChange={(e) => setStep2Term(e.target.value)} placeholder="Type their cellphone" className="e2r" />
+                                    <span className="e2b txt20">Use email instead</span>
+                                    <a className="e2b txt20 continue-cta" onClick={() => { setStep1Complete(false); }}>Continue <img src={arrowright} alt="" /></a>
+                                </div>
+                                <div className="contact-img">
+                                    <img src={desk} alt="" />
+                                </div>
+                            </div>
                         </div>
                     }
                 </div>
@@ -61,17 +77,25 @@ function GifterSteps() {
                         <img src={logonum} alt="" />
                     </div>
                     <div className="video_content">
-                        <a onClick={() => { setStep1Complete(true); setStep1(false); }}><img src={Arrowright} />Back</a>
-                        <h2 className="e1b">Let’s get the camera rolling</h2>
-                        {step21 && (
-                            <>
-                                <a><img src={note} alt="" /></a>
-                                <p className="e1sb txt20">If you accidentally close this window before you hit the Finish button, you will need to record your video again.</p>
-                            </>
-                        )}
-                        {step22 && (
-                            <a className="e2b txt20 recording-cta" onClick={() => navigate("/cameravideo")}>Continue to Recording <img src={arrowright} alt="" /></a>
-                        )}
+                        <div className="contact-wrapper">
+                            <div className="contact-content">
+                                <a onClick={() => { setStep1Complete(true); setStep1(false); }}><img src={Arrowright} />Back</a>
+                                <h2 className="e1b txt48">Let’s get the camera rolling</h2>
+                                {step21 && (
+                                    <>
+                                        <a><img src={note} alt="" /></a>
+                                        <p className="e1sb txt20">If you accidentally close this window before you hit the Finish button, you will need to record your video again.</p>
+                                    </>
+                                )}
+                                {step22 && (
+                                    <a className="e2b txt20 recording-cta" onClick={() => navigate("/cameravideo")}>Continue to Recording <img src={arrowright} alt="" /></a>
+                                )}
+                            </div>
+                      
+                        <div className="contact-img">
+                            <img src={desk} alt="" />
+                        </div>
+                    </div>
                     </div>
                 </div>
             }
