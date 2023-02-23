@@ -53,7 +53,7 @@ export default function Landing() {
                             </div>
                             <div className='modal-footer'>
                                 <div className='e1r txt22 d w100'>More questions?</div>
-                                <a className='e2b txt20 mt10 mb10 d w100'>Visit our FAQ<img src={arrowright} alt="" /></a>
+                                <button className='e2b txt20 mt10 mb10 d w100'>Visit our FAQ<img src={arrowright} alt="" /></button>
                                 <div className='footer-bottom-sec w100'>
                                     <div className='footer_img'>
                                         <img src={mark} alt="" className='d' />
