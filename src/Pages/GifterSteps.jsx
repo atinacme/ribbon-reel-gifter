@@ -51,8 +51,7 @@ function GifterSteps() {
                                     <input type="text" value={gifterName} onChange={(e) => setGifterName(e.target.value)} placeholder="Type your name" className="e2r" />
                                     <button className="e2b txt20 continue-cta" onClick={() => {
                                         setGifterAdded(true); setStep1(true); setStepCount(2);
-                                    }}
-                                    >Continue<img src={arrowright} alt="" /></button>
+                                    }}>Continue<img src={arrowright} alt="" /></button>
                                 </div>
                                 <div className="contact-img">
                                     <img src={desk} alt="" />
