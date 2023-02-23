@@ -303,6 +303,7 @@ a {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  padding-bottom: 30px;
 }
 .recepient-content a {
   text-decoration: none;
@@ -396,9 +397,36 @@ a {
   left: 0;
   right: 0;
 }
+a {
+  cursor: pointer;
+}
+.contact-img {
+  display: none;
+}
 @media (min-width: 769px) {
+  .contact-img {
+    display: block;
+  }
+  .contact-img img {
+    width: 100%;
+    display: block;
+  }
+  .contact-wrapper {
+    display: flex;
+    align-items: start;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.contact-content {
+  width: calc(70% - 30px);
+}
+
+.contact-img {
+  width: calc(30% - 30px);
+}
 .recepient_wrapper {
-  background: url(assets/recepientbg.svg) bottom no-repeat;
+  background: none;
   }
   .modal-dialog {
     max-width: 800px !important;
