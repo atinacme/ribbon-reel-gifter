@@ -58,9 +58,11 @@ export default function CameraVideo() {
             var formData = new FormData();
             formData.append('order_id', orderId);
             formData.append('file', blob);
+            const url = process.env.NODE_ENV === 'production' ? 'https://ribbon-reel-backend.herokuapp.com/api/file/upload' :
+                'http://localhost:8080/api/file/upload';
             const response = await axios({
                 method: 'POST',
-                url: 'https://ribbon-reel-backend.herokuapp.com/api/file/upload',
+                url: url,
                 data: formData,
             });
             if (response) {

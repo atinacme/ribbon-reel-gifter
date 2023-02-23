@@ -5,6 +5,7 @@ import Landing from './Pages/Landing';
 import CameraVideo from './Pages/CameraVideo';
 
 function App() {
+  console.log("env--->", process.env.NODE_ENV);
   return (
     <div className="App">
       <BrowserRouter>
