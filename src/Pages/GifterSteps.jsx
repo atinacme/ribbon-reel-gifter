@@ -5,12 +5,17 @@ import arrowright from "../assets/arrow-right.png";
 import note from "../assets/note.png";
 import { useNavigate } from 'react-router-dom';
 import desk from "../assets/desk.png";
+import { useDispatch, useSelector } from "react-redux";
+import { GifterStepsPageAction } from "../redux/Actions";
 
 function GifterSteps() {
     const navigate = useNavigate();
-    const [gifterName, setGifterName] = useState();
-    const [gifterAdded, setGifterAdded] = useState(false);
-    const [newGifter, setNewGifter] = useState(true);
+    const state = useSelector((state) => state);
+    const dispatch = useDispatch();
+    const [gifterName, setGifterName] = useState(state.landingPage.gifter_name);
+    const [gifterAdded, setGifterAdded] = useState(state.landingPage.gifter_name === '' ? false : true);
+    const newGifter = state.landingPage.gifter_name === '' ? true : false;
+    const [recepientAddress, setRecepientAddress] = useState(true)
     const [step1, setStep1] = useState(true);
     const [step1Complete, setStep1Complete] = useState(true);
     const [step21, setStep21] = useState(false);
@@ -66,17 +71,21 @@ function GifterSteps() {
                                     <div className="contact-wrapper">
                                         {newGifter ?
                                             <div className="contact-content">
-                                                <button onClick={() => { setGifterAdded(false); setStepCount(1); }}><img src={Arrowright} alt="" />Back</button>
+                                                {/* <button onClick={() => { setGifterAdded(false); setStepCount(1); }}><img src={Arrowright} alt="" />Back</button> */}
                                                 <h3 className="e1r txt28">Nice to meet you, <strong>{gifterName}! </strong>To whom are you sending the video?</h3>
                                                 <input type="text" value={step1Term} onChange={(e) => setStep1Term(e.target.value)} placeholder="Type your friend's name" className="e2r" />
                                                 <button className="e2b txt20 continue-cta" onClick={() => { setStep1(false); setStepCount(3); }}>Continue<img src={arrowright} alt="" /></button>
                                             </div>
                                             :
                                             <div className="contact-content">
-                                                <button onClick={() => navigate("/")}><img src={Arrowright} alt="" />Back</button>
-                                                <h3 className="e1r txt28"><strong>Alex,</strong>to whom are you sending the video?</h3>
+                                                {/* <button onClick={() => navigate("/")}><img src={Arrowright} alt="" />Back</button> */}
+                                                <h3 className="e1r txt28"><strong>{gifterName}, </strong>to whom are you sending the video?</h3>
                                                 <input type="text" value={step1Term} onChange={(e) => setStep1Term(e.target.value)} placeholder="Type your friend's name" className="e2r" />
-                                                <button className="e2b txt20 continue-cta" onClick={() => { setStep1(false); setStepCount(2); }}>Continue<img src={arrowright} alt="" /></button>
+                                                <button className="e2b txt20 continue-cta" onClick={() => {
+                                                    setStep1(false);
+                                                    setStepCount(2);
+                                                    dispatch(GifterStepsPageAction(step1Term, state.gifterStepsPage.receiver_email))
+                                                }}>Continue<img src={arrowright} alt="" /></button>
                                             </div>
                                         }
                                         <div className="contact-img">
@@ -100,8 +109,17 @@ function GifterSteps() {
                                                 Back
                                             </button>
                                             <h3 className="e1r txt28">Tell us where to send <strong>{step1Term}</strong> the video?</h3>
-                                            <input type="number" minLength={10} maxLength={10} value={step2Term} onChange={(e) => setStep2Term(e.target.value)} placeholder="Type their cellphone" className="e2r" />
-                                            <span className="e2b txt20">Use email instead</span>
+                                            {recepientAddress ?
+                                                <>
+                                                    <input type="email" value={step2Term} onChange={(e) => setStep2Term(e.target.value)} placeholder="Type their email" className="e2r" />
+                                                    <span className="e2b txt20" onClick={() => setRecepientAddress(!recepientAddress)}>Use phone instead</span>
+                                                </>
+                                                :
+                                                <>
+                                                    <input type="number" minLength={10} maxLength={10} value={step2Term} onChange={(e) => setStep2Term(e.target.value)} placeholder="Type their cellphone" className="e2r" />
+                                                    <span className="e2b txt20" onClick={() => setRecepientAddress(!recepientAddress)}>Use email instead</span>
+                                                </>
+                                            }
                                             <button className="e2b txt20 continue-cta" onClick={() => {
                                                 setStep1Complete(false);
                                                 if (!newGifter) {
@@ -109,6 +127,7 @@ function GifterSteps() {
                                                 } else {
                                                     setStepCount(4);
                                                 }
+                                                dispatch(GifterStepsPageAction(state.gifterStepsPage.receiver_name, step2Term))
                                             }}>
                                                 Continue <img src={arrowright} alt="" />
                                             </button>
@@ -126,7 +145,7 @@ function GifterSteps() {
                 <div className="record_video-wrapper">
                     <div className="recepient-header">
                         <img src={logo} alt="" />
-                        <div class="num_wrap"><span>{stepCount}/5</span></div>
+                        <div className="num_wrap"><span>{stepCount}/5</span></div>
                     </div>
                     <div className="video_content">
                         <div className="contact-wrapper">

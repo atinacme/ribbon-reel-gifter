@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import brand from '../assets/Brand.png';
 import modal1 from "../assets/modal1.png";
 import modal2 from "../assets/modal2.png";
@@ -10,10 +10,28 @@ import arrowright from '../assets/arrow-right.png';
 import mark from "../assets/Mark.png";
 import brand1 from "../assets/brandlogo.png";
 import logotype from "../assets/Logotype.png";
+import { useDispatch } from 'react-redux';
+import { CameraVideoPageAction, LandingPageAction } from '../redux/Actions';
 
 export default function Landing() {
     const [show, setShow] = useState(false);
+    const [gifterName, setGifterName] = useState('')
     const navigate = useNavigate();
+    const dispatch = useDispatch();
+
+    useEffect(() => {
+        let paramStringOrderId = window.location.href.split('?')[1];
+        let queryStringOrderId = new URLSearchParams(paramStringOrderId);
+        for (let pair of queryStringOrderId.entries()) {
+            dispatch(CameraVideoPageAction(pair[1]))
+        }
+        let paramStringGifterName = window.location.href.split('?')[2];
+        let queryStringGifterName = new URLSearchParams(paramStringGifterName);
+        for (let pair of queryStringGifterName.entries()) {
+            setGifterName(pair[1])
+            dispatch(LandingPageAction(pair[1]))
+        }
+    }, []);
 
     const handleClose = () => {
         setShow(false);
@@ -73,7 +91,7 @@ export default function Landing() {
                         <img src={brand} alt="" />
                     </div>
                     <div className='landing-content page-width'>
-                        <div className='e1b txt48 mb20'>Alex!</div>
+                        <div className='e1b txt48 mb20'>{gifterName}!</div>
                         <div className='e2sb txt20 mt10'>Time to create a personalized  video message for your gift!</div>
                         <button className='e1b txt20 mt90 txt20' onClick={handleShow}>Let's Begin!</button>
                         {/* <a href={''} className='e1sb mt50 txt16'>How does it work?</a> */}
