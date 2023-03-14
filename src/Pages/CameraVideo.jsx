@@ -3,6 +3,16 @@ import '@shopify/polaris/build/esm/styles.css';
 import axios from 'axios';
 import Webcam from 'react-webcam';
 import { useSelector } from 'react-redux';
+import videologo from "../assets/video_logo.png";
+import logo from "../assets/recepientlogo.png";
+import thumb from "../assets/thumbnail.png";
+import relatedvideo from "../assets/relatedvideo.png";
+import arrowright from "../assets/arrow-right.png";
+import GiftWrap from "../assets/GiftWrap.png";
+import ribbonheader from "../assets/ribbonheader.png";
+import bgimg from "../assets/bg.png";
+import edit from "../assets/edit.png";
+import footerlogo from "../assets/footerlogo.png";
 
 export default function CameraVideo() {
     const state = useSelector((state) => state);
@@ -68,24 +78,168 @@ export default function CameraVideo() {
     };
     return (
         <>
-            {!videoStatus?
-                <>
-                    <Webcam audio={true} ref={webcamRef} />
-                    {capturing ? (
-                        <button onClick={handleStopCaptureClick}>Stop Capture</button>
-                    ) : (
-                        <button onClick={handleStartCaptureClick}>Start Capture</button>
-                    )}
-                    {recordedChunks.length > 0 && (
+            <div className='video_container hide'>
+                <div className='video_wrapper  hide'>
+                    {!videoStatus ?
                         <>
-                            <button onClick={handleAddVideo}>Add Video</button>
+                            <div className="recepient-header">
+                                <img src={videologo} alt="" />
+                                <div className='video_timing'>60s</div>
+                                <div className="close">✕</div>
 
+                            </div>
+                            <Webcam audio={true} ref={webcamRef} />
+                            <div className='cta_wrapper'>
+                                {capturing ? (
+                                    <button className='finsh_cta sfr' onClick={handleStopCaptureClick}>Finish</button>
+                                ) : (
+                                    <button className='add_cta' onClick={handleStartCaptureClick}></button>
+                                )}
+                                {recordedChunks.length > 0 && (
+                                    <>
+                                        <button className='finsh_cta sfr' onClick={handleAddVideo}>Add Video</button>
+
+                                    </>
+                                )}
+                            </div>
                         </>
-                    )}
-                </>
-                :
-                <p style={{color: '#fff', fontSize: '20px'}}>Video Message Added Successfully</p>
-            }
+                        :
+                        <p style={{ color: '#fff', fontSize: '20px' }}>Video Message Added Successfully</p>
+                    }
+                </div>
+                <div className='video_upload hide'>
+                    <h2 className='e1b txt28'>Uploading...</h2>
+                </div>
+            </div>
+            <div className='gifterRecord hide'>
+                <div className="recepient-header">
+                    <img src={logo} alt="" />
+                    <div className="num_wrap"><span>/5</span></div>
+                </div>
+                <div className='giftRecord_content'>
+                    <p className='e1b txt22'>And, Scene!</p>
+                    <h2 className='e1b'>Let’s Review</h2>
+                    <div className='video_content'>
+                        <div className='video_wrap'>
+                            <video width="640" height="360" controls>
+                                <source src="myvideo.mp4" type="video/mp4" />
+                                Your browser does not support the video tag.
+                            </video>
+                        </div>
+                        <img src={thumb} alt="" className='thumb' />
+                        <br></br>
+                        <img src={relatedvideo} alt="" className='record' />
+                        <button className="e2b txt20">Continue <img src={arrowright} alt="" /></button>
+                    </div>
+                </div>
+            </div>
+            <div className='review_wrapper hide'>
+                <div className="recepient-header">
+                    <img src={logo} alt="" />
+                    <div className="num_wrap"><span>/5</span></div>
+                </div>
+                <div className='review_content'>
+                    <span className='e1b txt28'>That's a wrap! </span>
+                    <h2 className='e1b'>Sebastian is gonna love it!</h2>
+                    <p className='e1r txt20'>Review your Ribbon Reel</p>
+                    <div className='animation-step10 step'>
+                        <div className='animation10-phone'>
+                            <div className='animation10_wrapper'>
+                                <div className='animation-step10_img'>
+                                    <img src={bgimg} alt='bgimg' />
+                                </div>
+                                <div className="video-wrap">
+                                    <video width="640" height="360" controls>
+                                        <source src="myvideo.mp4" type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
+                                </div>
+                            </div>
+                            <div className='animation-step10_descrbtion'>
+                                <div className='thum_img'>
+                                    <img src={thumb} alt="" />
+                                    <br></br>
+                                    <img src={relatedvideo} alt="" />
+                                </div>
+                                <form>
+                                    <div className='label_wrap'>
+                                        <label className='e1b txt20'>
+                                            From
+                                            <input type="text" placeholder='Alex' className='txt28' />
+                                        </label>
+                                        <img src={edit} alt="" />
+                                    </div>
+                                    <div className='label_wrap'>
+                                        <label className='e1b txt20'>
+                                            To
+                                            <input type="text" placeholder='Sebastian' className='txt28' />
+                                        </label>
+                                        <img src={edit} alt="" />
+                                    </div>
+                                    <div><p className='e1b'>sebastianemail@gmail.com</p></div>
+                                    <button className='e1b txt20'>Send!</button>
+                                </form>
+                            </div>
+
+                        </div>
+
+                        <div className='animation10-desktop'>
+                            <div className='animation10-desktop_wrapper'>
+                                <div className='animation-step10_img'>
+                                    <img src={GiftWrap} alt='bgimg' />
+                                    <div className="video-wrap">
+                                        <video width="640" height="360" controls>
+                                            <source src="myvideo.mp4" type="video/mp4" />
+                                            Your browser does not support the video tag.
+                                        </video>
+                                    </div>
+                                    <div className='thum_img'>
+                                        <img src={thumb} alt="" />
+                                        <br></br>
+                                        <img src={relatedvideo} alt="" />
+                                    </div>
+                                </div>
+                                <div className='animation-step10_descrbtion'>
+                                    <form>
+                                        <div>
+                                            <label className='e1b txt20'>
+                                                From
+                                                <input type="text" placeholder='Alex' className='txt28' />
+                                            </label>
+                                            <img src={edit} alt="" />
+                                        </div>
+                                        <div>
+                                            <label className='e1b txt20'>
+                                                To
+                                                <input type="text" placeholder='Sebastian' className='txt28' />
+                                            </label>
+                                            <img src={edit} alt="" />
+                                        </div>
+                                        <div><p className='e1b'>sebastianemail@gmail.com</p></div>
+                                        <button className='e1b txt20'>Send!</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div className='review_footer'>
+                        <img src={footerlogo} alt="" />
+                        <p className='sfr txt14'>© 2022 RibbonReel. All rights reserved.</p>
+                        <p className='sfr txt14'>Privacy Policy </p>
+                    </div>
+                </div>
+            </div>
+            <div className='mobile_recording-step1'>
+                <div className='record_video-wrap'>
+                    <video width="640" height="360" controls>
+                        <source src="myvideo.mp4" type="video/mp4" />
+                        Your browser does not support the video tag.
+                    </video>
+                </div>
+                <div className='videoanimation'>
+                    
+                </div>
+            </div>
         </>
     );
 }

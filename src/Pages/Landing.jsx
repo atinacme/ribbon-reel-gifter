@@ -12,6 +12,7 @@ import brand1 from "../assets/brandlogo.png";
 import logotype from "../assets/Logotype.png";
 import { useDispatch } from 'react-redux';
 import { CameraVideoPageAction, LandingPageAction } from '../redux/Actions';
+import logo from "../assets/recepientlogo.png";
 
 export default function Landing() {
     const [show, setShow] = useState(false);
@@ -98,6 +99,8 @@ export default function Landing() {
                     </div>
                 </div>
             </div>
+
+          
         </>
     );
 }
