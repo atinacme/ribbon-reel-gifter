@@ -12,7 +12,6 @@ import brand1 from "../assets/brandlogo.png";
 import logotype from "../assets/Logotype.png";
 import { useDispatch } from 'react-redux';
 import { CameraVideoPageAction, LandingPageAction } from '../redux/Actions';
-import logo from "../assets/recepientlogo.png";
 
 export default function Landing() {
     const [show, setShow] = useState(false);
@@ -22,16 +21,15 @@ export default function Landing() {
 
     useEffect(() => {
         let paramStringOrderId = window.location.href.split('?')[1];
-        let queryStringOrderId = new URLSearchParams(paramStringOrderId);
-        for (let pair of queryStringOrderId.entries()) {
-            dispatch(CameraVideoPageAction(pair[1]))
-        }
-        let paramStringGifterName = window.location.href.split('?')[2];
-        let queryStringGifterName = new URLSearchParams(paramStringGifterName);
-        for (let pair of queryStringGifterName.entries()) {
-            setGifterName(pair[1])
-            dispatch(LandingPageAction(pair[1]))
-        }
+        dispatch(CameraVideoPageAction(paramStringOrderId))
+        const url = process.env.NODE_ENV === 'production' ? `https://ribbon-reel-backend.herokuapp.com/api/orders/findParticularOrder/${paramStringOrderId}` :
+            `http://localhost:8080/api/orders/findParticularOrder/${paramStringOrderId}`;
+        fetch(url, { method: 'GET' })
+            .then(res => res.json())
+            .then(data => {
+                setGifterName(data[0].sender_name)
+                dispatch(LandingPageAction(data[0].sender_name, data[0].sender_email, data[0].sender_phone))
+            })
     }, []);
 
     const handleClose = () => {
@@ -100,7 +98,7 @@ export default function Landing() {
                 </div>
             </div>
 
-          
+
         </>
     );
 }

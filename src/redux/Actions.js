@@ -6,14 +6,14 @@ export const CameraVideoPageAction = (order_id) => {
     };
 };
 
-export const LandingPageAction = (gifter_name) => {
+export const LandingPageAction = (gifter_name, gifter_email, gifter_phone) => {
     return {
-        type: LANDING_PAGE_ITEM, gifter_name
+        type: LANDING_PAGE_ITEM, gifter_name, gifter_email, gifter_phone
     };
 };
 
-export const GifterStepsPageAction = (receiver_name, receiver_email) => {
+export const GifterStepsPageAction = (receiver_name, receiver_contact, receiver_contact_type) => {
     return {
-        type: GIFTER_STEPS_ITEM, receiver_name, receiver_email
+        type: GIFTER_STEPS_ITEM, receiver_name, receiver_contact, receiver_contact_type
     };
 };

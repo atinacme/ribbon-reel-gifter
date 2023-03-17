@@ -7,7 +7,6 @@ import { Provider } from "react-redux";
 import PersistedStore from "./redux/PersistedStore";
 
 function App() {
-  console.log("env--->", process.env.NODE_ENV);
   return (
     <div className="App">
       <Provider store={PersistedStore.getDefaultStore().store}>

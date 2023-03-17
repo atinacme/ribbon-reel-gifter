@@ -1,8 +1,9 @@
-import { CAMERA_VIDEO_ITEM, GIFTER_STEPS_ITEM } from "../Types";
+import { GIFTER_STEPS_ITEM } from "../Types";
 
 const initialState = {
     receiver_name: '',
-    receiver_email: ''
+    receiver_contact: '',
+    receiver_contact_type: 'email'
 };
 
 export function GifterStepsPageReducer(state = initialState, action) {
@@ -11,7 +12,8 @@ export function GifterStepsPageReducer(state = initialState, action) {
             return {
                 ...state,
                 receiver_name: action.receiver_name,
-                receiver_email: action.receiver_email
+                receiver_contact: action.receiver_contact,
+                receiver_contact_type: action.receiver_contact_type
             };
         default:
             return state;

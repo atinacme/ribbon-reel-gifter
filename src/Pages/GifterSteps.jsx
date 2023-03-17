@@ -7,6 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import desk from "../assets/desk.png";
 import { useDispatch, useSelector } from "react-redux";
 import { GifterStepsPageAction } from "../redux/Actions";
+import { Country } from 'country-state-city';
+import Select from 'react-select';
 
 function GifterSteps() {
     const navigate = useNavigate();
@@ -23,6 +25,8 @@ function GifterSteps() {
     const [step1Term, setStep1Term] = useState("");
     const [step2Term, setStep2Term] = useState("");
     const [stepCount, setStepCount] = useState(1);
+    const countryList = Country.getAllCountries().map(v => ({ ...v, 'value': "+" + " " + (v.phonecode) + " " + v.name, 'label': "+" + " " + "(" + v.phonecode + ")" + " " + v.name }))
+    const [selectedOption, setSelectedOption] = useState(null);
 
     useEffect(() => {
         if (!step1Complete) {
@@ -84,7 +88,7 @@ function GifterSteps() {
                                                 <button className="e2b txt20 continue-cta" onClick={() => {
                                                     setStep1(false);
                                                     setStepCount(2);
-                                                    dispatch(GifterStepsPageAction(step1Term, state.gifterStepsPage.receiver_email))
+                                                    dispatch(GifterStepsPageAction(step1Term, state.gifterStepsPage.receiver_contact, state.gifterStepsPage.receiver_contact_type))
                                                 }}>Continue<img src={arrowright} alt="" /></button>
                                             </div>
                                         }
@@ -112,12 +116,27 @@ function GifterSteps() {
                                             {recepientAddress ?
                                                 <>
                                                     <input type="email" value={step2Term} onChange={(e) => setStep2Term(e.target.value)} placeholder="Type their email" className="e2r" />
-                                                    <span className="e2b txt20" onClick={() => setRecepientAddress(!recepientAddress)}>Use phone instead</span>
+                                                    <span className="e2b txt20" onClick={() => {
+                                                        setRecepientAddress(!recepientAddress)
+                                                        dispatch(GifterStepsPageAction(state.gifterStepsPage.receiver_name, state.gifterStepsPage.receiver_contact, 'phone'))
+                                                    }}>Use phone instead</span>
                                                 </>
                                                 :
                                                 <>
+                                                    <Select
+                                                        defaultValue={selectedOption}
+                                                        onChange={setSelectedOption}
+                                                        options={countryList}
+                                                        classNames={{
+                                                            control: (state) =>
+                                                                state.isFocused ? 'border-red-600' : 'border-grey-300',
+                                                        }}
+                                                    />
                                                     <input type="number" minLength={10} maxLength={10} value={step2Term} onChange={(e) => setStep2Term(e.target.value)} placeholder="Type their cellphone" className="e2r" />
-                                                    <span className="e2b txt20" onClick={() => setRecepientAddress(!recepientAddress)}>Use email instead</span>
+                                                    <span className="e2b txt20" onClick={() => {
+                                                        setRecepientAddress(!recepientAddress)
+                                                        dispatch(GifterStepsPageAction(state.gifterStepsPage.receiver_name, state.gifterStepsPage.receiver_contact, 'email'))
+                                                    }}>Use email instead</span>
                                                 </>
                                             }
                                             <button className="e2b txt20 continue-cta" onClick={() => {
@@ -127,7 +146,11 @@ function GifterSteps() {
                                                 } else {
                                                     setStepCount(4);
                                                 }
-                                                dispatch(GifterStepsPageAction(state.gifterStepsPage.receiver_name, step2Term))
+                                                if (recepientAddress) {
+                                                    dispatch(GifterStepsPageAction(state.gifterStepsPage.receiver_name, step2Term, state.gifterStepsPage.receiver_contact_type))
+                                                } else {
+                                                    dispatch(GifterStepsPageAction(state.gifterStepsPage.receiver_name, "+" + selectedOption.phonecode + step2Term, state.gifterStepsPage.receiver_contact_type))
+                                                }
                                             }}>
                                                 Continue <img src={arrowright} alt="" />
                                             </button>

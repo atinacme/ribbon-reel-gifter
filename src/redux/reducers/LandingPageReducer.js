@@ -1,7 +1,9 @@
 import { LANDING_PAGE_ITEM } from "../Types";
 
 const initialState = {
-    gifter_name: ''
+    gifter_name: '',
+    gifter_email: '',
+    gifter_phone: ''
 };
 
 export function LandingPageReducer(state = initialState, action) {
@@ -9,7 +11,9 @@ export function LandingPageReducer(state = initialState, action) {
         case LANDING_PAGE_ITEM:
             return {
                 ...state,
-                gifter_name: action.gifter_name
+                gifter_name: action.gifter_name,
+                gifter_email: action.gifter_email,
+                gifter_phone: action.gifter_phone
             };
         default:
             return state;

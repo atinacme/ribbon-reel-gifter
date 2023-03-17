@@ -56,11 +56,14 @@ export default function CameraVideo() {
             });
             blob.lastModifiedDate = new Date();
             blob.name = "react-webcam-stream-capture.webm";
-            console.log('record--->', blob);
             var formData = new FormData();
             formData.append('order_id', state.cameraVideoPage.order_id);
+            formData.append('send_by', 'gifter');
             formData.append('sender_name', state.landingPage.gifter_name);
-            formData.append('receiver_email', state.gifterStepsPage.receiver_email);
+            formData.append('sender_email', state.landingPage.gifter_email);
+            formData.append('sender_phone', state.landingPage.gifter_phone);
+            formData.append('receiver_contact', state.gifterStepsPage.receiver_contact);
+            formData.append('receiver_contact_type', state.gifterStepsPage.receiver_contact_type);
             formData.append('receiver_name', state.gifterStepsPage.receiver_name);
             formData.append('file', blob);
             const url = process.env.NODE_ENV === 'production' ? 'https://ribbon-reel-backend.herokuapp.com/api/file/upload' :
@@ -78,8 +81,8 @@ export default function CameraVideo() {
     };
     return (
         <>
-            <div className='video_container hide'>
-                <div className='video_wrapper  hide'>
+            <div className='video_container '>
+                <div className='video_wrapper  '>
                     {!videoStatus ?
                         <>
                             <div className="recepient-header">
@@ -88,7 +91,7 @@ export default function CameraVideo() {
                                 <div className="close">✕</div>
 
                             </div>
-                            <Webcam audio={true} ref={webcamRef} />
+                            <Webcam audio={false} ref={webcamRef} />
                             <div className='cta_wrapper'>
                                 {capturing ? (
                                     <button className='finsh_cta sfr' onClick={handleStopCaptureClick}>Finish</button>
@@ -111,7 +114,7 @@ export default function CameraVideo() {
                     <h2 className='e1b txt28'>Uploading...</h2>
                 </div>
             </div>
-            <div className='gifterRecord hide'>
+            {/* <div className='gifterRecord hide'>
                 <div className="recepient-header">
                     <img src={logo} alt="" />
                     <div className="num_wrap"><span>/5</span></div>
@@ -133,7 +136,7 @@ export default function CameraVideo() {
                     </div>
                 </div>
             </div>
-            <div className='review_wrapper hide'>
+            <div className='review_wrapper'>
                 <div className="recepient-header">
                     <img src={logo} alt="" />
                     <div className="num_wrap"><span>/5</span></div>
@@ -239,7 +242,7 @@ export default function CameraVideo() {
                 <div className='videoanimation'>
                     
                 </div>
-            </div>
+            </div> */}
         </>
     );
 }
