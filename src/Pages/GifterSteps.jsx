@@ -185,6 +185,8 @@ function GifterSteps() {
                                     <img src={Arrowright} alt="" />
                                     Back
                                 </button>
+
+                                
                                 <h2 className="e1b txt48">Let’s get the camera rolling</h2>
                                 {step21 && (
                                     <>

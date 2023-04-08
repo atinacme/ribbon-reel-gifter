@@ -12,6 +12,7 @@ import brand1 from "../assets/brandlogo.png";
 import logotype from "../assets/Logotype.png";
 import { useDispatch } from 'react-redux';
 import { CameraVideoPageAction, LandingPageAction } from '../redux/Actions';
+import crossicon from "../assets/cross_icon.svg";
 
 export default function Landing() {
     const [show, setShow] = useState(false);
@@ -22,8 +23,7 @@ export default function Landing() {
     useEffect(() => {
         let paramStringOrderId = window.location.href.split('?')[1];
         dispatch(CameraVideoPageAction(paramStringOrderId))
-        const url = process.env.NODE_ENV === 'production' ? `https://ribbon-reel-backend.herokuapp.com/api/orders/findParticularOrder/${paramStringOrderId}` :
-            `http://localhost:8080/api/orders/findParticularOrder/${paramStringOrderId}`;
+        const url = `${process.env.REACT_APP_BASE_URL}/orders/findParticularOrder/${paramStringOrderId}`;
         fetch(url, { method: 'GET' })
             .then(res => res.json())
             .then(data => {
@@ -43,7 +43,8 @@ export default function Landing() {
         <>
             <div className='modal-container'>
                 <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
+                 <Modal.Header closeButton> 
+                 {/* <img src={crossicon} /> */}
                     </Modal.Header>
                     <Modal.Body>
                         <div className="modal-wrapper">
