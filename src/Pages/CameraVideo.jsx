@@ -27,20 +27,20 @@ import checkion from "../assets/Icon.png";
 export default function CameraVideo() {
     const state = useSelector((state) => state);
     const orderId = state.cameraVideoPage.order_id;
-    const [completeVideo, setCompleteVideo] = useState(false)
+    const [completeVideo, setCompleteVideo] = useState(false);
     const [videoStatus, setVideoStatus] = useState(false);
     const webcamRef = React.useRef(null);
     const mediaRecorderRef = React.useRef(null);
     const [capturing, setCapturing] = React.useState(false);
-    const [uploading, setUploading] = useState()
-    const [reviewStep1, setReviewStep1] = useState(true)
-    const [reviewStep2, setReviewStep2] = useState(false)
-    const [reviewStep3, setReviewStep3] = useState(false)
-    const [reviewStep4, setReviewStep4] = useState(false)
-    const [reviewStep5, setReviewStep5] = useState(false)
-    const [reviewStep6, setReviewStep6] = useState(false)
-    const [blob, setBlob] = useState()
-    const [videoSend, setVideoSend] = useState()
+    const [uploading, setUploading] = useState();
+    const [reviewStep1, setReviewStep1] = useState(true);
+    const [reviewStep2, setReviewStep2] = useState(false);
+    const [reviewStep3, setReviewStep3] = useState(false);
+    const [reviewStep4, setReviewStep4] = useState(false);
+    const [reviewStep5, setReviewStep5] = useState(false);
+    const [reviewStep6, setReviewStep6] = useState(false);
+    const [blob, setBlob] = useState();
+    const [videoSend, setVideoSend] = useState();
     const [recordedChunks, setRecordedChunks] = React.useState([]);
 
     const handleStartCaptureClick = React.useCallback(() => {
@@ -74,13 +74,13 @@ export default function CameraVideo() {
             const blob = new Blob(recordedChunks, {
                 type: "video/webm"
             });
-            setBlob(URL.createObjectURL(blob))
+            setBlob(URL.createObjectURL(blob));
             blob.lastModifiedDate = new Date();
             blob.name = "react-webcam-stream-capture.webm";
             setVideoStatus(true);
-            setUploading(false)
-            setTimeout(() => setUploading(true), 1000)
-            setTimeout(() => setCompleteVideo(true), 1500)
+            setUploading(false);
+            setTimeout(() => setUploading(true), 1000);
+            setTimeout(() => setCompleteVideo(true), 1500);
         }
     };
 
@@ -113,46 +113,44 @@ export default function CameraVideo() {
                 }
                 setRecordedChunks([]);
             } catch (e) {
-                console.log("res--->", e)
+                console.log(e);
                 // setVideoSend(false);
             }
         }
-    }
-
-    console.log("dcsd--->", videoSend)
+    };
 
     useEffect(() => {
         if (!reviewStep1 && !reviewStep2 && reviewStep3 && !reviewStep4 && !reviewStep5 && !reviewStep6) {
             setTimeout(() => {
-                setReviewStep1(false)
-                setReviewStep2(false)
-                setReviewStep3(false)
-                setReviewStep4(true)
-                setReviewStep5(false)
-                setReviewStep6(false)
-            }, 10000)
+                setReviewStep1(false);
+                setReviewStep2(false);
+                setReviewStep3(false);
+                setReviewStep4(true);
+                setReviewStep5(false);
+                setReviewStep6(false);
+            }, 10000);
         }
         if (!reviewStep1 && !reviewStep2 && !reviewStep3 && reviewStep4 && !reviewStep5 && !reviewStep6) {
             setTimeout(() => {
-                setReviewStep1(false)
-                setReviewStep2(false)
-                setReviewStep3(false)
-                setReviewStep4(false)
-                setReviewStep5(true)
-                setReviewStep6(false)
-            }, 2000)
+                setReviewStep1(false);
+                setReviewStep2(false);
+                setReviewStep3(false);
+                setReviewStep4(false);
+                setReviewStep5(true);
+                setReviewStep6(false);
+            }, 2000);
         }
         if (!reviewStep1 && !reviewStep2 && !reviewStep3 && !reviewStep4 && reviewStep5 && !reviewStep6) {
             setTimeout(() => {
-                setReviewStep1(false)
-                setReviewStep2(false)
-                setReviewStep3(false)
-                setReviewStep4(false)
-                setReviewStep5(false)
-                setReviewStep6(true)
-            }, 2000)
+                setReviewStep1(false);
+                setReviewStep2(false);
+                setReviewStep3(false);
+                setReviewStep4(false);
+                setReviewStep5(false);
+                setReviewStep6(true);
+            }, 2000);
         }
-    })
+    });
     return (
         <>
             {!completeVideo ?
@@ -216,22 +214,22 @@ export default function CameraVideo() {
                                     </div>
                                     {/* <img src={thumb} alt="" className='thumb' /> */}
                                     <br></br>
-                                    {videoSend === undefined ? <img src={relatedvideo} alt="" className='record' onClick={() => window.location.reload()} />: null}
+                                    {videoSend === undefined ? <img src={relatedvideo} alt="" className='record' onClick={() => window.location.reload()} /> : null}
                                     <button className="e2b txt20" onClick={() => {
                                         if (videoSend === true) {
-                                            setReviewStep1(false)
-                                            setReviewStep2(false)
-                                            setReviewStep3(false)
-                                            setReviewStep4(false)
-                                            setReviewStep5(false)
-                                            setReviewStep6(true)
+                                            setReviewStep1(false);
+                                            setReviewStep2(false);
+                                            setReviewStep3(false);
+                                            setReviewStep4(false);
+                                            setReviewStep5(false);
+                                            setReviewStep6(true);
                                         } else {
-                                            setReviewStep1(false)
-                                            setReviewStep2(true)
-                                            setReviewStep3(false)
-                                            setReviewStep4(false)
-                                            setReviewStep5(false)
-                                            setReviewStep6(false)
+                                            setReviewStep1(false);
+                                            setReviewStep2(true);
+                                            setReviewStep3(false);
+                                            setReviewStep4(false);
+                                            setReviewStep5(false);
+                                            setReviewStep6(false);
                                         }
                                     }} >Continue <img src={arrowright} alt="" /></button>
                                 </div>
@@ -285,13 +283,13 @@ export default function CameraVideo() {
                                                     </div>
                                                     <div><p className='e1b'>{state.gifterStepsPage.receiver_contact}</p></div>
                                                     <button className='e1b txt20' onClick={() => {
-                                                        setReviewStep1(false)
-                                                        setReviewStep2(false)
-                                                        setReviewStep3(true)
-                                                        setReviewStep4(false)
-                                                        setReviewStep5(false)
-                                                        setReviewStep6(false)
-                                                        handleSendVideo()
+                                                        setReviewStep1(false);
+                                                        setReviewStep2(false);
+                                                        setReviewStep3(true);
+                                                        setReviewStep4(false);
+                                                        setReviewStep5(false);
+                                                        setReviewStep6(false);
+                                                        handleSendVideo();
                                                     }}>Send!</button>
                                                 </form>
                                             </div>
@@ -332,13 +330,13 @@ export default function CameraVideo() {
                                                         </div>
                                                         <div><p className='e1b'>{state.gifterStepsPage.receiver_contact}</p></div>
                                                         <button className='e1b txt20' onClick={() => {
-                                                            setReviewStep1(false)
-                                                            setReviewStep2(false)
-                                                            setReviewStep3(true)
-                                                            setReviewStep4(false)
-                                                            setReviewStep5(false)
-                                                            setReviewStep6(false)
-                                                            handleSendVideo()
+                                                            setReviewStep1(false);
+                                                            setReviewStep2(false);
+                                                            setReviewStep3(true);
+                                                            setReviewStep4(false);
+                                                            setReviewStep5(false);
+                                                            setReviewStep6(false);
+                                                            handleSendVideo();
                                                         }}>Send!</button>
                                                     </form>
                                                 </div>
@@ -402,12 +400,12 @@ export default function CameraVideo() {
                                             <div className='reaction_icons'>
                                                 <ul>
                                                     <li className='e2b' onClick={() => {
-                                                        setReviewStep1(true)
-                                                        setReviewStep2(false)
-                                                        setReviewStep3(false)
-                                                        setReviewStep4(false)
-                                                        setReviewStep5(false)
-                                                        setReviewStep6(false)
+                                                        setReviewStep1(true);
+                                                        setReviewStep2(false);
+                                                        setReviewStep3(false);
+                                                        setReviewStep4(false);
+                                                        setReviewStep5(false);
+                                                        setReviewStep6(false);
                                                     }}><img src={videoplay} />Preview</li>
                                                     <a href={blob} download="video.mp4"><li className='e2b'><img src={downloadimg} />Download</li></a>
                                                 </ul>
@@ -440,12 +438,12 @@ export default function CameraVideo() {
                                                 <div className='reaction_icons'>
                                                     <ul>
                                                         <li className='e2b' onClick={() => {
-                                                            setReviewStep1(true)
-                                                            setReviewStep2(false)
-                                                            setReviewStep3(false)
-                                                            setReviewStep4(false)
-                                                            setReviewStep5(false)
-                                                            setReviewStep6(false)
+                                                            setReviewStep1(true);
+                                                            setReviewStep2(false);
+                                                            setReviewStep3(false);
+                                                            setReviewStep4(false);
+                                                            setReviewStep5(false);
+                                                            setReviewStep6(false);
                                                         }}><img src={videoplay} />Preview</li>
                                                         <a href={blob} download="video.mp4"><li className='e2b'><img src={downloadimg} />Download</li></a>
                                                     </ul>
