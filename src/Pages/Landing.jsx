@@ -12,24 +12,23 @@ import brand1 from "../assets/brandlogo.png";
 import logotype from "../assets/Logotype.png";
 import { useDispatch } from 'react-redux';
 import { CameraVideoPageAction, LandingPageAction } from '../redux/Actions';
-import crossicon from "../assets/cross_icon.svg";
 
 export default function Landing() {
     const [show, setShow] = useState(false);
-    const [gifterName, setGifterName] = useState('')
+    const [gifterName, setGifterName] = useState('');
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
     useEffect(() => {
         let paramStringOrderId = window.location.href.split('?')[1];
-        dispatch(CameraVideoPageAction(paramStringOrderId))
+        dispatch(CameraVideoPageAction(paramStringOrderId));
         const url = `${process.env.REACT_APP_BASE_URL}/orders/findParticularOrder/${paramStringOrderId}`;
         fetch(url, { method: 'GET' })
             .then(res => res.json())
             .then(data => {
-                setGifterName(data[0].sender_name)
-                dispatch(LandingPageAction(data[0].sender_name, data[0].sender_email, data[0].sender_phone))
-            })
+                setGifterName(data[0].sender_name);
+                dispatch(LandingPageAction(data[0].sender_name, data[0].sender_email, data[0].sender_phone));
+            });
     }, []);
 
     const handleClose = () => {
@@ -43,8 +42,7 @@ export default function Landing() {
         <>
             <div className='modal-container'>
                 <Modal show={show} onHide={handleClose}>
-                 <Modal.Header closeButton> 
-                 {/* <img src={crossicon} /> */}
+                    <Modal.Header closeButton>
                     </Modal.Header>
                     <Modal.Body>
                         <div className="modal-wrapper">
